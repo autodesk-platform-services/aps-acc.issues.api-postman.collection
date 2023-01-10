@@ -9,11 +9,9 @@
 
 ## Description
 
-This repository provides a postman collection that demonstrates the usage of [Issues API for Autodesk Construction Cloud](https://forge.autodesk.com/en/docs/acc/v1/overview/field-guide/issues/)(ACC) .  
+This repository provides a postman collection that demonstrates the usage of [Issues API for Autodesk Construction Cloud](https://aps.autodesk.com/en/docs/acc/v1/overview/field-guide/issues/) .  
 
 The API supports **3 legged token** only.
-
-As of April 15th, 2022, ACC Issues API is **preview beta**. 
 
 ## What's Postman?
 
@@ -26,13 +24,13 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
 ## Setup
 
-1.  **Forge Account**: Learn how to create a Forge Account, activate the subscription and create an app by [this tutorial](http://learnforge.autodesk.io/#/account/). Ensure to select API Type **Autodesk Construction Cloud**. Get Forge _client id_, _client secret_ and  _callback url_. Please register Forge app with the _callback url_ as 
+1.  **APS Account**: Learn how to create a APS Account, activate the subscription and create an app by [this tutorial](http://aps.autodesk.com/tutorials/#/account/). Ensure to select API Type **Autodesk Construction Cloud**. Get APS _client id_, _client secret_ and  _callback url_. Please register APS app with the _callback url_ as 
 
     ```https://www.getpostman.com/oauth2/callback```
 
    <p align="center"><img src="./help/api-type.png" width="400" ></p>   
 
-2. **ACC Account and project**: must be Account Admin to add the app integration. [Learn about provisioning](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). Make a note with the __account name__
+2. **ACC Account and project**: must be Account Admin to add the app integration. [Learn about provisioning](https://aps.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). Make a note with the __account name__
 
 3. Follow the [product help document](https://construction.autodesk.com/tools/issues-software/) of ACC to create some issues.
 
@@ -47,7 +45,7 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
 6.  Clone this repository or download it. It's recommended to install [GitHub Desktop](https://desktop.github.com/). To clone it via command line, use the following (**Terminal** on MacOSX/Linux, **Git Shell** on Windows):
 
-    ```git clone https://github.com/Autodesk-Forge/forge-autodesk.docs.issue.api-postman.collection```
+    ```git clone https://github.com/autodesk-platform-services/aps-acc.issues.api-postman.collection/```
 
 7. Import the collection and environment files to Postman
 
@@ -77,24 +75,24 @@ Issue API requires to work with 3-legged token. This collection takes **[Inherit
 
 1. Assume the steps of **Setup** have been performed and the access token is ready.
 
-2. Run the scripts in **Run First**. It will get account(hub) id, project id and one user id (for assignee when creating a new issue). Because the API to get project users of ACC has not been exposed, we workaround by calling [GET:Account Users](https://forge.autodesk.com/en/docs/acc/v1/reference/http/users-GET/). This endpoint requires 2-legged token, so run _03-[backup]Authentication 2-legged token_ before running _03-[Workaround-2LO] Get One Account User Id_. 
+2. Run the scripts in **Run First**. It will get account(hub) id, project id and one user id (for assignee when creating a new issue). Because the API to get project users of ACC has not been exposed, we workaround by calling [GET:Account Users](https://aps.autodesk.com/en/docs/acc/v1/reference/http/users-GET/). This endpoint requires 2-legged token, so run _03-[backup]Authentication 2-legged token_ before running _03-[Workaround-2LO] Get One Account User Id_. 
 
    Next call _04-GET One Location_ to get one location id (for testing issue creation)
 
 
-3. Run the endpoints in **API References**. Follow [API documents](https://forge.autodesk.com/en/docs/acc/v1/reference/http/issues-users-me-GET/) to verify if the APIs work well. Try to change the parameters in various scenarios to see how it goes. Check UI if it works well with API (such as creating/patching new issue and creating new comments etc. )
+3. Run the endpoints in **API References**. Follow [API documents](https://aps.autodesk.com/en/docs/acc/v1/reference/http/issues-users-me-GET/) to verify if the APIs work well. Try to change the parameters in various scenarios to see how it goes. Check UI if it works well with API (such as creating/patching new issue and creating new comments etc. )
     
     <p align="center"><img src="./help/collection.png" width="400" ></p>   
 
-4. (Optional) In ACC, a reference is defined by Relationships API, which is a common across different modules. To work with **Issue>>References**, you can use [Relationship API](https://forge.autodesk.com/en/docs/acc/v1/reference/http/relationship-service-v2-search-relationships-GET/). This sample Postman collection includes a few sample usages. For more detail about Relationships API, please take a look [at this blog](https://forge.autodesk.com/blog/bim-360acc-relationships-api). 
+4. (Optional) In ACC, a reference is defined by Relationships API, which is a common across different modules. To work with **Issue>>References**, you can use [Relationship API](https://aps.autodesk.com/en/docs/acc/v1/reference/http/relationship-service-v2-search-relationships-GET/). This sample Postman collection includes a few sample usages. For more detail about Relationships API, please take a look [at this blog](https://forge.autodesk.com/blog/bim-360acc-relationships-api). 
 
-    *  01-Get id of one photo: call [Photo API](https://forge.autodesk.com/en/docs/acc/v1/reference/http/photos-getfilteredphotos-POST/) to get one photo id
+    *  01-Get id of one photo: call [Photo API](https://aps.autodesk.com/en/docs/acc/v1/reference/http/photos-getfilteredphotos-POST/) to get one photo id
     * 02-Add Reference of Issue with Photo: add reference between one issue (from previous test scripts in #3) and one photo
     * 03-Search Relationship of Issues and Photos: get all referenced photos of one issue
     * 04-Supported Relationships to Create: get all relationships that can be created. Check those which are related with issue. Add more test scripts to create/get relationships of other types of references (document, rfi, asset etc.) 
     
 **Blogs**:
-- [Forge Blog](https://forge.autodesk.com)
+- [APS Blog](https://aps.autodesk.com/blog)
 - [Field of View](https://fieldofviewblog.wordpress.com/), a BIM focused blog
 
 ## License
@@ -103,4 +101,4 @@ This sample is licensed under the terms of the [MIT License](http://opensource.o
 
 ## Written by
 
-Xiaodong Liang [@coldwood](https://twitter.com/coldwood), [Developer Advocate and Support team](http://forge.autodesk.com)
+Xiaodong Liang [@coldwood](https://twitter.com/coldwood), Developer Advocate and Support team
