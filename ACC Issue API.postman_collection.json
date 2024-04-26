@@ -217,14 +217,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_domain}}/authentication/v1/authenticate",
+							"raw": "{{base_domain}}/authentication/v2/token",
 							"host": [
 								"{{base_domain}}"
 							],
 							"path": [
 								"authentication",
-								"v1",
-								"authenticate"
+								"v2",
+								"token"
 							]
 						}
 					},
@@ -1710,12 +1710,12 @@
 			},
 			{
 				"key": "accessTokenUrl",
-				"value": "https://developer.api.autodesk.com/authentication/v1/gettoken",
+				"value": "https://developer.api.autodesk.com/authentication/v2/token",
 				"type": "string"
 			},
 			{
 				"key": "authUrl",
-				"value": "https://developer.api.autodesk.com/authentication/v1/authorize",
+				"value": "https://developer.api.autodesk.com/authentication/v2/authorize",
 				"type": "string"
 			},
 			{
