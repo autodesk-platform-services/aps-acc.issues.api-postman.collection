@@ -57,8 +57,8 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
    - Grant Type ``Authorization Code``
    - Callback URL  ``https://www.getpostman.com/oauth2/callback``
-   - Auth URL  ``https://developer.api.autodesk.com/authentication/v1/authorize``
-   - Access Token URL  ``https://developer.api.autodesk.com/authentication/v1/gettoken``
+   - Auth URL  ``https://developer.api.autodesk.com/authentication/v2/authorize``
+   - Access Token URL  ``https://developer.api.autodesk.com/authentication/v2/token``
 
    - Client ID ``{{client_id}}``
    - Client Secret ``{{client_secret}}``
