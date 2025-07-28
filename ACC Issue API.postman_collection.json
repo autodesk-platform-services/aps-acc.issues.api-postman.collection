@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "7fd8a3f7-0440-4591-b117-5158fd091d4c",
-		"name": "ACC Issue API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "9a54a72a-ca2b-4d1c-92ec-d692dd1ea607",
+		"name": "ACC Issue API Copy 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1440859"
 	},
 	"item": [
 		{
@@ -15,38 +16,55 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Get account collection, Status code is 200\", function () {",
+									"pm.test(\"GET Hubs Collection. Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"var account_name = pm.environment.get(\"account_name\") ",
+									"// find the specified project and setup the environment variable \"hub_id\"",
+									"const hub_name = pm.variables.get(\"hub_name\");",
+									"pm.test(\"find matches account by name: \" + hub_name, function () {",
+									"    const body = JSON.parse(responseBody);",
+									"    const found = body.data.find(d => d.attributes.name == hub_name);",
 									"",
-									"pm.test(\"find matches account by id: \" + account_name, function () {",
-									"    var body = JSON.parse(responseBody);",
-									"    var find = body.data.find(d=>d.attributes.name == account_name)",
-									"",
-									"    pm.expect(find).not.eq(undefined); ",
+									"    pm.expect(found).to.not.be.undefined;",
 									"    ",
-									"    if(find){ ",
-									"        pm.environment.set(\"account_id_without_b\", find.id.split(\"b.\").join(\"\"));",
-									"    }else{",
-									"        ",
-									"    }",
-									"    ",
+									"    pm.environment.set(\"account_id\", found.id);",
+									"    pm.environment.set(\"account_id_without_b\", found.id.split(\"b.\").join(\"\"));",
 									"});",
-									"",
-									"     "
+									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"pm.variables.set(\"hub_name\", \"Developer Advocacy Support\");",
+									"",
+									"//clean variables that are not preset.",
+									"pm.environment.unset(\"account_id\");  ",
+									"pm.environment.unset(\"account_id_without_b\");  ",
+									"pm.environment.unset(\"project_id\");  ",
+									"pm.environment.unset(\"project_id_without_b\");  ",
+									"pm.environment.unset(\"assignee_id\");  ",
+									"pm.environment.unset(\"one_location_id\");  ",
+									"pm.environment.unset(\"one_issue_type_id\");  ",
+									"pm.environment.unset(\"one_sub_issue_type_id\");  ",
+									"pm.environment.unset(\"text_custom_attribute_id\");  ",
+									"pm.environment.unset(\"dropdown_custom_attribute_id\");  ",
+									"pm.environment.unset(\"one_dropdown_value\");  ",
+									"pm.environment.unset(\"one_root_cause_category_id\");  ",
+									"pm.environment.unset(\"one_root_cause_id\");  ",
+									"pm.environment.unset(\"one_issue_id\");  ",
+									"pm.environment.unset(\"current_date_time\");  ",
+									"pm.environment.unset(\"due_date\");  ",
+									" pm.environment.unset(\"one_photo_id\");  ",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -75,37 +93,36 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Get project collection, Status code is 200\", function () {",
+									"pm.test(\"GET Projects Collection. Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"var project_name = pm.environment.get(\"project_name\") ",
-									"pm.test(\"find matches project by name: \" + project_name, function () {",
-									"    var body = JSON.parse(responseBody);",
-									"    var find = body.data.find(d=>d.attributes.name == project_name)",
+									"// find the specified project and setup the environment variable \"hub_id\"",
+									"const project_name = pm.variables.get(\"project_name\");",
+									"pm.test(\"find matches account by name: \" + project_name, function () {",
+									"    const body = JSON.parse(responseBody);",
+									"    const found = body.data.find(d => d.attributes.name == project_name);",
 									"",
-									"    pm.expect(find).not.eq(undefined); ",
+									"    pm.expect(found).to.not.be.undefined;",
 									"    ",
-									"    if(find){ ",
-									"        pm.environment.set(\"project_id_without_b\", find.id.split(\"b.\").join(\"\"));",
-									"    }else{",
-									"        ",
-									"    }",
-									"    ",
+									"    pm.environment.set(\"project_id\", found.id);",
+									"    pm.environment.set(\"project_id_without_b\", found.id.split(\"b.\").join(\"\"));",
 									"});",
-									"",
-									"     "
+									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"pm.variables.set(\"project_name\", \"Centric Hospital\");",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -130,15 +147,25 @@
 					"response": []
 				},
 				{
-					"name": "03-[!!GAP!!] Get One Project User Id",
+					"name": "03-Get One Project User Id",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Get project users collection, Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//get first user",
+									" var body = JSON.parse(responseBody);",
+									"",
+									"pm.environment.set(\"assignee_id\",body.results[1].autodeskId );",
+									" ",
+									"     "
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -147,7 +174,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -155,148 +183,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "NO Endpoint for ACC yet to get project members",
-							"host": [
-								"NO Endpoint for ACC yet to get project members"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "03-[backup]Authentication 2-legged token",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var data = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"access_token\", data.access_token); "
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "client_id",
-									"value": "{{client_id}}",
-									"type": "text"
-								},
-								{
-									"key": "client_secret",
-									"value": "{{client_secret}}",
-									"type": "text"
-								},
-								{
-									"key": "grant_type",
-									"value": "client_credentials",
-									"type": "text"
-								},
-								{
-									"key": "scope",
-									"value": "account:read data:read",
-									"type": "text"
-								},
-								{
-									"key": "",
-									"value": "",
-									"type": "text",
-									"disabled": true
-								}
-							]
-						},
-						"url": {
-							"raw": "{{base_domain}}/authentication/v2/token",
+							"raw": "{{base_domain}}/construction/admin/v1/projects/{{project_id_without_b}}/users",
 							"host": [
 								"{{base_domain}}"
 							],
 							"path": [
-								"authentication",
-								"v2",
-								"token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "03-[Workaround-2LO] Get One Account User Id",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Get account users, Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"var one_user_email = pm.environment.get(\"one_user_email_as_assignee\");",
-									"",
-									"pm.test(\"find one user id by email: \" + one_user_email, function () {",
-									"    var body = JSON.parse(responseBody);",
-									"    var find = body.find(d=>d.email==one_user_email)  ",
-									"",
-									"    pm.expect(find).not.eq(undefined); ",
-									"    pm.environment.set(\"assignee_id\", find.uid); ",
-									"    ",
-									"});",
-									"",
-									"  "
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{base_domain}}/hq/v1/accounts/:account_id/users",
-							"host": [
-								"{{base_domain}}"
-							],
-							"path": [
-								"hq",
+								"construction",
+								"admin",
 								"v1",
-								"accounts",
-								":account_id",
+								"projects",
+								"{{project_id_without_b}}",
 								"users"
-							],
-							"variable": [
-								{
-									"key": "account_id",
-									"value": "{{account_id_without_b}}"
-								}
 							]
 						}
 					},
@@ -335,8 +232,8 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"type": "text",
 								"value": "Bearer {{access_token}}",
+								"type": "text",
 								"disabled": true
 							}
 						],
@@ -428,8 +325,8 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"type": "text",
 								"value": "Bearer {{access_token}}",
+								"type": "text",
 								"disabled": true
 							},
 							{
@@ -507,8 +404,8 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"type": "text",
 								"value": "Bearer {{access_token}}",
+								"type": "text",
 								"disabled": true
 							}
 						],
@@ -687,8 +584,8 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"type": "text",
 								"value": "Bearer {{access_token}}",
+								"type": "text",
 								"disabled": true
 							}
 						],
@@ -766,8 +663,8 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"type": "text",
 								"value": "Bearer {{access_token}}",
+								"type": "text",
 								"disabled": true
 							}
 						],
@@ -1683,6 +1580,256 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Webhook",
+			"item": [
+				{
+					"name": "Step 1 : Find the Scope ID for Events",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get User@Me, Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"}); ",
+									"",
+									"pm.test(\"get user id \", function () {",
+									"    var body = JSON.parse(responseBody);  ",
+									"    pm.expect(body).not.eq(undefined); ",
+									"    pm.environment.set(\"creator_id\", body.id); ",
+									"    ",
+									"});  "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "VIEW",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "userId",
+								"value": "200902260532621",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "In the scripts of Run First,   Prepare valid ProjectId. Ensure logged user is project admin",
+							"host": [
+								"In the scripts of Run First,   Prepare valid ProjectId",
+								" Ensure logged user is project admin"
+							],
+							"query": [
+								{
+									"key": "page[limit]",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step 2 : Prepare to Manage Callbacks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get User@Me, Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"}); ",
+									"",
+									"pm.test(\"get user id \", function () {",
+									"    var body = JSON.parse(responseBody);  ",
+									"    pm.expect(body).not.eq(undefined); ",
+									"    pm.environment.set(\"creator_id\", body.id); ",
+									"    ",
+									"});  "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "VIEW",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "userId",
+								"value": "200902260532621",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "Create your own callback, or webhook hubs such as RequestBin. Get the callback url.",
+							"host": [
+								"Create your own callback, or webhook hubs such as RequestBin",
+								" Get the callback url",
+								""
+							],
+							"query": [
+								{
+									"key": "page[limit]",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step 3 : Create a Webhook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get User@Me, Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"}); ",
+									"",
+									"pm.test(\"get user id \", function () {",
+									"    var body = JSON.parse(responseBody);  ",
+									"    pm.expect(body).not.eq(undefined); ",
+									"    pm.environment.set(\"creator_id\", body.id); ",
+									"    ",
+									"});  "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n           \"callbackUrl\": \"http://bf067e05.ngrok.io/callback\",\n           \"scope\": {\n             \"project\": \"{{project_id}}\"\n           },\n           \"hookAttribute\": {\n             \"MyTestData\": {\"test1\":123}\n           }\n         } ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/webhooks/v1/systems/autodesk.construction.issues/events/issue.created-1.0/hooks",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"webhooks",
+								"v1",
+								"systems",
+								"autodesk.construction.issues",
+								"events",
+								"issue.created-1.0",
+								"hooks"
+							],
+							"query": [
+								{
+									"key": "page[limit]",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step 4: watch your callback",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get User@Me, Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"}); ",
+									"",
+									"pm.test(\"get user id \", function () {",
+									"    var body = JSON.parse(responseBody);  ",
+									"    pm.expect(body).not.eq(undefined); ",
+									"    pm.environment.set(\"creator_id\", body.id); ",
+									"    ",
+									"});  "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "VIEW",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "userId",
+								"value": "200902260532621",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "watch your callback. When the event is triggered, get the information you want to check. See blog for more details: https://aps.autodesk.com/blog/webhook-api-acc-issue-released",
+							"protocol": "watch your callback. When the event is triggered, get the information you want to check. See blog for more details: https",
+							"host": [
+								"aps",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"blog",
+								"webhook-api-acc-issue-released"
+							],
+							"query": [
+								{
+									"key": "page[limit]",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
@@ -1690,7 +1837,7 @@
 		"oauth2": [
 			{
 				"key": "scope",
-				"value": "data:read data:write",
+				"value": "data:read data:write account:read",
 				"type": "string"
 			},
 			{

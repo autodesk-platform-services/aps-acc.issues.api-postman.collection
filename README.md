@@ -2,7 +2,7 @@
 
 [![Postman](https://img.shields.io/badge/Postman-v8.11-orange.svg)](https://www.getpostman.com/)
 
-[![Issue API of Autodesk Construction Cloud](https://img.shields.io/badge/acc%20issue%20api-v1-yellowgreen)](https://forge.autodesk.com/en/docs/acc/v1/overview/field-guide/issues/)
+[![Issue API of Autodesk Construction Cloud](https://img.shields.io/badge/acc%20issue%20api-v1-yellowgreen)](https://aps.autodesk.com/en/docs/acc/v1/overview/field-guide/issues/)
 
 ![Beginner](https://img.shields.io/badge/Level-Beginner-green.svg)
 [![License](https://img.shields.io/:license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
@@ -49,11 +49,23 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
 7. Import the collection and environment files to Postman
 
-8. In environment, input _client id_, _client secret_, _account name_, _project name_ and _one user email as assignee_
+8. In environment, input _client id_, _client secret.
 
    <p align="center"><img src="./help/apiref-env.png" width="600" ></p>  
 
-9. In context menu of collection >> **Edit**, switch to the tab **Authorization**. Click **Get New Access Token**, input the variables as below:
+9. Input the account(hub) name in pre-scripts of **GET one ACC account**, this will get the account(hub) id of ACC account.
+
+ <div style="text-align: center;">
+  <img src="help/account.png" alt="Postman Image" width="500" />
+ </div>
+
+10. Input the project name in pre-scripts of **GET one ACC project**, this will get the project id of ACC account from step #1. `project_id_with_b` will be used for working with RFI attachment uploading (Data Managament API). `project_id_without_b` will be used for all RFI APIs. 
+
+<div style="text-align: center;">
+  <img src="help/project.png" alt="Postman Image" width="500" />
+ </div> 
+
+11. In context menu of collection >> **Edit**, switch to the tab **Authorization**. Click **Get New Access Token**, input the variables as below:
 
    - Grant Type ``Authorization Code``
    - Callback URL  ``https://www.getpostman.com/oauth2/callback``
