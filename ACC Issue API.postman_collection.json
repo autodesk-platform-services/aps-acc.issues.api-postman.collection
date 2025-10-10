@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "9a54a72a-ca2b-4d1c-92ec-d692dd1ea607",
-		"name": "ACC Issue API Copy 2",
+		"_postman_id": "9cee1ecb-5409-456f-8e1e-1110857310a2",
+		"name": "ACC Issue API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1440859"
 	},
@@ -34,7 +34,8 @@
 									""
 								],
 								"type": "text/javascript",
-								"packages": {}
+								"packages": {},
+								"requests": {}
 							}
 						},
 						{
@@ -60,11 +61,21 @@
 									"pm.environment.unset(\"one_issue_id\");  ",
 									"pm.environment.unset(\"current_date_time\");  ",
 									"pm.environment.unset(\"due_date\");  ",
-									" pm.environment.unset(\"one_photo_id\");  ",
+									" pm.environment.unset(\"creator_id\");  ",
+									"  pm.environment.unset(\"one_attachment_id\");  ",
+									" pm.environment.unset(\"newStorageId\");  ",
+									" pm.environment.unset(\"bucketKey\");  ",
+									" pm.environment.unset(\"random_guid\");  ",
+									"pm.environment.unset(\"rootFolderUrn\"); ",
+									"pm.environment.unset(\"randomFileName\"); ",
+									"pm.environment.unset(\"uploadKey\"); ",
+									"pm.environment.unset(\"objectKey\"); ",
+									"pm.environment.unset(\"uploadUrl\"); ",
 									""
 								],
 								"type": "text/javascript",
-								"packages": {}
+								"packages": {},
+								"requests": {}
 							}
 						}
 					],
@@ -194,100 +205,6 @@
 								"projects",
 								"{{project_id_without_b}}",
 								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "04-GET One Location",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Get locations collection, Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									" ",
-									"pm.test(\"get one location id: \", function () {",
-									"    var body = JSON.parse(responseBody);",
-									"",
-									"    pm.expect(body.results).not.eq(undefined); ",
-									"",
-									"    ",
-									"    //the first location ",
-									"    pm.environment.set(\"one_location_id\", body.results[1].id);",
-									"     ",
-									"});",
-									"",
-									"     "
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "{{base_domain}}/construction/locations/v2/projects/:projectId/trees/default/nodes",
-							"host": [
-								"{{base_domain}}"
-							],
-							"path": [
-								"construction",
-								"locations",
-								"v2",
-								"projects",
-								":projectId",
-								"trees",
-								"default",
-								"nodes"
-							],
-							"query": [
-								{
-									"key": "limit",
-									"value": "2",
-									"description": "<input a limit in 2-200>",
-									"disabled": true
-								},
-								{
-									"key": "offset",
-									"value": "5",
-									"description": "<input a offset in 2-200>",
-									"disabled": true
-								},
-								{
-									"key": "filter[isActive]",
-									"value": "true",
-									"disabled": true
-								},
-								{
-									"key": "filter[createdBy]",
-									"value": "System",
-									"description": "user id. 'System' is the default system",
-									"disabled": true
-								},
-								{
-									"key": "filter[createdAt]",
-									"value": "2021-03-04...",
-									"description": "ISO 8601 time",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "projectId",
-									"value": "{{project_id_without_b}}"
-								}
 							]
 						}
 					},
@@ -891,7 +808,9 @@
 									"",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						},
 						{
@@ -910,7 +829,9 @@
 									"",
 									"     "
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						}
 					],
@@ -925,7 +846,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"title\": \"[{{current_date_time}}]create issue by API- assign to one user\",\n        \"description\": \"create issue by {{creator_id}}- assign to one user{{assignee_id}}\",\n        \"status\": \"open\",\n        \"assignedTo\": \"{{assignee_id}}\",\n        \"assignedToType\": \"user\",\n        \"dueDate\": \"{{due_date}}\",\n        \"issueSubtypeId\":\"{{one_sub_issue_type_id}}\", \n        \"rootCauseId\":\"{{one_root_cause_id}}\",\n        \"locationId\":\"{{one_location_id}}\"\n\n}"
+							"raw": "{\n        \"title\": \"[{{current_date_time}}]create issue by API- assign to one user\",\n        \"description\": \"create issue by {{creator_id}}- assign to one user{{assignee_id}}\",\n        \"status\": \"open\",\n        \"assignedTo\": \"{{assignee_id}}\",\n        \"assignedToType\": \"user\",\n        \"dueDate\": \"{{due_date}}\",\n        \"issueSubtypeId\":\"{{one_sub_issue_type_id}}\", \n        \"rootCauseId\":\"{{one_root_cause_id}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_domain}}/construction/issues/v1/projects/:projectId/issues",
@@ -969,7 +890,9 @@
 									"});",
 									" "
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						}
 					],
@@ -984,7 +907,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"title\": \"[{{current_date_time}}]create issue by API- assign to one user\",\n        \"description\": \"create issue by API- assign to one user\",\n        \"status\": \"open\",\n        \"assignedTo\": \"{{assignee_id}}\",\n        \"assignedToType\": \"user\",\n        \"dueDate\": \"{{due_date}}\",\n        \"issueSubtypeId\":\"{{one_sub_issue_type_id}}\",\n        \"rootCauseId\":\"{{one_root_cause_id}}\",\n        \"locationId\":\"{{one_location_id}}\",\n\n\n        \"customAttributes\": [\n          {\n            \"attributeDefinitionId\": \"{{text_custom_attribute_id}}\",\n            \"value\": \"demo values of custom attribute\"\n          },\n          {\n            \"attributeDefinitionId\": \"{{dropdown_custom_attribute_id}}\",\n            \"value\": \"{{one_dropdown_value}}\"\n          } \n        ]\n}\n "
+							"raw": "{\n        \"title\": \"[{{current_date_time}}]create issue by API- with custom attributes\",\n        \"description\": \"create issue by API- with custom attribute\",\n        \"status\": \"open\",\n        \"assignedTo\": \"{{assignee_id}}\",\n        \"assignedToType\": \"user\",\n        \"dueDate\": \"{{due_date}}\",\n        \"issueSubtypeId\":\"{{one_sub_issue_type_id}}\",\n        \"rootCauseId\":\"{{one_root_cause_id}}\", \n        \"customAttributes\": [\n          {\n            \"attributeDefinitionId\": \"{{text_custom_attribute_id}}\",\n            \"value\": \"demo values of custom attribute\"\n          },\n          {\n            \"attributeDefinitionId\": \"{{dropdown_custom_attribute_id}}\",\n            \"value\": \"{{one_dropdown_value}}\"\n          } \n        ]\n}\n "
 						},
 						"url": {
 							"raw": "{{base_domain}}/construction/issues/v1/projects/:projectId/issues",
@@ -1021,7 +944,9 @@
 									"});",
 									" "
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						},
 						{
@@ -1034,7 +959,9 @@
 									"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2)",
 									"pm.environment.set(\"current_date_time\", current_date_time);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						}
 					],
@@ -1091,7 +1018,9 @@
 									"});",
 									" "
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						},
 						{
@@ -1104,7 +1033,9 @@
 									"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2)",
 									"pm.environment.set(\"current_date_time\", current_date_time);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						}
 					],
@@ -1145,11 +1076,11 @@
 							"variable": [
 								{
 									"key": "projectId",
-									"value": "9563e750-18ed-43f7-a415-bf17d5d0051d"
+									"value": "{{project_id_without_b}}"
 								},
 								{
 									"key": "issueId",
-									"value": "d0cdcd31-6dcb-458e-b12b-5929a9fed2a8"
+									"value": "{{one_issue_id}}"
 								}
 							]
 						}
@@ -1351,6 +1282,193 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GET attachments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get one issue attachments collection. Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"get one attachment data: \", function () {",
+									"    var resonse = JSON.parse(pm.response.text());",
+									"    if(resonse.attachments && resonse.attachments.length>0){",
+									"        pm.environment.set(\"one_attachment_id\", resonse.attachments[0].attachmentId);  ",
+									"        const newStorageId = resonse.attachments[0].storageUrn;",
+									"        const parsedData = newStorageId.match('^urn:adsk\\.objects:os\\.object:([-_.a-z0-9]{3,128})\\/(.+)$');",
+									"        const bucketKey = parsedData[1];",
+									"        const objectKey = parsedData[2];",
+									"        pm.environment.set(\"newStorageId\",newStorageId); ",
+									"        pm.environment.set(\"bucketKey\",bucketKey);",
+									"        pm.environment.set(\"objectKey\",objectKey);  ",
+									"    } ",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_domain}}/construction/issues/v1/projects/:projectId/attachments/:issueId/items",
+							"host": [
+								"{{base_domain}}"
+							],
+							"path": [
+								"construction",
+								"issues",
+								"v1",
+								"projects",
+								":projectId",
+								"attachments",
+								":issueId",
+								"items"
+							],
+							"variable": [
+								{
+									"key": "projectId",
+									"value": "{{project_id_without_b}}"
+								},
+								{
+									"key": "issueId",
+									"value": "{{one_issue_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST attachments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create attachment for one issue. Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									" "
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const random_guid = crypto.randomUUID(); ",
+									"pm.environment.set(\"random_guid\", random_guid);",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \t\t\"domainEntityId\": \"{{one_issue_id}}\",\n    \t\t\"attachments\": [\n                {\n                    \"attachmentId\": \"{{random_guid}}\",\n                    \"displayName\": \"myfile.png\",\n                    \"fileName\": \"{{objectKey}}\",\n                    \"attachmentType\": \"issue-attachment\",\n                    \"storageUrn\": \"{{newStorageId}}\"\n                }\n    \t\t]\n \t }"
+						},
+						"url": {
+							"raw": "{{base_domain}}/construction/issues/v1/projects/:projectId/attachments",
+							"host": [
+								"{{base_domain}}"
+							],
+							"path": [
+								"construction",
+								"issues",
+								"v1",
+								"projects",
+								":projectId",
+								"attachments"
+							],
+							"variable": [
+								{
+									"key": "projectId",
+									"value": "{{project_id_without_b}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Attachment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"delete one attachment. Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									" "
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_domain}}/construction/issues/v1/projects/:projectId/attachments/:issueId/items/:attachmentId",
+							"host": [
+								"{{base_domain}}"
+							],
+							"path": [
+								"construction",
+								"issues",
+								"v1",
+								"projects",
+								":projectId",
+								"attachments",
+								":issueId",
+								"items",
+								":attachmentId"
+							],
+							"variable": [
+								{
+									"key": "projectId",
+									"value": "{{project_id_without_b}}"
+								},
+								{
+									"key": "issueId",
+									"value": "{{one_issue_id}}"
+								},
+								{
+									"key": "attachmentId",
+									"value": "{{one_attachment_id}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1358,476 +1476,982 @@
 			"name": "Additional Test",
 			"item": [
 				{
-					"name": "01-Get One Photo Id",
-					"event": [
+					"name": "Add References",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Get One Photo Id, Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"",
-									"pm.test(\"Photos collection is not null\", function () {",
-									"    var body = JSON.parse(responseBody);",
-									"    var find = body.results;",
-									"",
-									"    pm.expect(find).not.eq(undefined); ",
-									"",
-									"     if(find && find.length>0)",
-									"        pm.environment.set(\"one_photo_id\",find[0].id); ",
-									"     ",
-									"    ",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{}"
-						},
-						"url": {
-							"raw": "{{base_domain}}/construction/photos/v1/projects/:projectId/photos:filter",
-							"host": [
-								"{{base_domain}}"
-							],
-							"path": [
-								"construction",
-								"photos",
-								"v1",
-								"projects",
-								":projectId",
-								"photos:filter"
-							],
-							"variable": [
+							"name": "01-Get One Photo Id",
+							"event": [
 								{
-									"key": "projectId",
-									"value": "{{project_id_without_b}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "02-Add Reference of Issue with Photo",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Add Reference of Issue with Photo, Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									" "
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n           {\n             \"entities\": [\n               {\n                 \"domain\": \"autodesk-bim360-issue\",\n                 \"type\": \"issue\",\n                 \"id\": \"{{one_issue_id}}\"\n               },\n               {\n                 \"domain\": \"autodesk-construction-photo\",\n                 \"type\": \"photo\",\n                 \"id\": \"{{one_photo_id}}\" \n               }\n             ]\n           }\n         ]"
-						},
-						"url": {
-							"raw": "{{base_domain}}/bim360/relationship/v2/containers/:containerId/relationships",
-							"host": [
-								"{{base_domain}}"
-							],
-							"path": [
-								"bim360",
-								"relationship",
-								"v2",
-								"containers",
-								":containerId",
-								"relationships"
-							],
-							"variable": [
-								{
-									"key": "containerId",
-									"value": "{{project_id_without_b}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "03-Search Relationship of Issues and Photos",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Search Relationship with Domain and Type - Asset, Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"",
-									"pm.test(\"relationships is not null\", function () {",
-									"    var body = JSON.parse(responseBody);",
-									"    var find = body.relationships;",
-									"",
-									"    pm.expect(find).not.eq(undefined); ",
-									"     ",
-									"    ",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_domain}}/bim360/relationship/v2/containers/:projectId/relationships:search?domain=autodesk-bim360-issue&type=issue&id={{one_issue_id}}&withDomain=autodesk-construction-photo&withType=photo",
-							"host": [
-								"{{base_domain}}"
-							],
-							"path": [
-								"bim360",
-								"relationship",
-								"v2",
-								"containers",
-								":projectId",
-								"relationships:search"
-							],
-							"query": [
-								{
-									"key": "domain",
-									"value": "autodesk-bim360-issue"
-								},
-								{
-									"key": "type",
-									"value": "issue"
-								},
-								{
-									"key": "id",
-									"value": "{{one_issue_id}}"
-								},
-								{
-									"key": "withDomain",
-									"value": "autodesk-construction-photo"
-								},
-								{
-									"key": "withType",
-									"value": "photo"
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get One Photo Id, Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Photos collection is not null\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.results;",
+											"",
+											"    pm.expect(find).not.eq(undefined); ",
+											"",
+											"     if(find && find.length>0)",
+											"        pm.environment.set(\"one_photo_id\",find[0].id); ",
+											"     ",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
 								}
 							],
-							"variable": [
-								{
-									"key": "projectId",
-									"value": "{{project_id_without_b}}"
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{base_domain}}/construction/photos/v1/projects/:projectId/photos:filter",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"construction",
+										"photos",
+										"v1",
+										"projects",
+										":projectId",
+										"photos:filter"
+									],
+									"variable": [
+										{
+											"key": "projectId",
+											"value": "{{project_id_without_b}}"
+										}
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "04-Supported Relationships to Create",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_domain}}/bim360/relationship/v2/utility/relationships:writable",
-							"host": [
-								"{{base_domain}}"
-							],
-							"path": [
-								"bim360",
-								"relationship",
-								"v2",
-								"utility",
-								"relationships:writable"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Webhook",
-			"item": [
-				{
-					"name": "Step 1 : Find the Scope ID for Events",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Get User@Me, Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"}); ",
-									"",
-									"pm.test(\"get user id \", function () {",
-									"    var body = JSON.parse(responseBody);  ",
-									"    pm.expect(body).not.eq(undefined); ",
-									"    pm.environment.set(\"creator_id\", body.id); ",
-									"    ",
-									"});  "
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "VIEW",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text",
-								"disabled": true
 							},
-							{
-								"key": "userId",
-								"value": "200902260532621",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "In the scripts of Run First,   Prepare valid ProjectId. Ensure logged user is project admin",
-							"host": [
-								"In the scripts of Run First,   Prepare valid ProjectId",
-								" Ensure logged user is project admin"
-							],
-							"query": [
-								{
-									"key": "page[limit]",
-									"value": "200",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Step 2 : Prepare to Manage Callbacks",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Get User@Me, Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"}); ",
-									"",
-									"pm.test(\"get user id \", function () {",
-									"    var body = JSON.parse(responseBody);  ",
-									"    pm.expect(body).not.eq(undefined); ",
-									"    pm.environment.set(\"creator_id\", body.id); ",
-									"    ",
-									"});  "
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "VIEW",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "userId",
-								"value": "200902260532621",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "Create your own callback, or webhook hubs such as RequestBin. Get the callback url.",
-							"host": [
-								"Create your own callback, or webhook hubs such as RequestBin",
-								" Get the callback url",
-								""
-							],
-							"query": [
-								{
-									"key": "page[limit]",
-									"value": "200",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Step 3 : Create a Webhook",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Get User@Me, Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"}); ",
-									"",
-									"pm.test(\"get user id \", function () {",
-									"    var body = JSON.parse(responseBody);  ",
-									"    pm.expect(body).not.eq(undefined); ",
-									"    pm.environment.set(\"creator_id\", body.id); ",
-									"    ",
-									"});  "
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n           \"callbackUrl\": \"http://bf067e05.ngrok.io/callback\",\n           \"scope\": {\n             \"project\": \"{{project_id}}\"\n           },\n           \"hookAttribute\": {\n             \"MyTestData\": {\"test1\":123}\n           }\n         } ",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"response": []
 						},
-						"url": {
-							"raw": "https://developer.api.autodesk.com/webhooks/v1/systems/autodesk.construction.issues/events/issue.created-1.0/hooks",
-							"protocol": "https",
-							"host": [
-								"developer",
-								"api",
-								"autodesk",
-								"com"
-							],
-							"path": [
-								"webhooks",
-								"v1",
-								"systems",
-								"autodesk.construction.issues",
-								"events",
-								"issue.created-1.0",
-								"hooks"
-							],
-							"query": [
+						{
+							"name": "02-Add Reference of Issue with Photo",
+							"event": [
 								{
-									"key": "page[limit]",
-									"value": "200",
-									"disabled": true
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add Reference of Issue with Photo, Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											" "
+										],
+										"type": "text/javascript"
+									}
 								}
-							]
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n           {\n             \"entities\": [\n               {\n                 \"domain\": \"autodesk-bim360-issue\",\n                 \"type\": \"issue\",\n                 \"id\": \"{{one_issue_id}}\"\n               },\n               {\n                 \"domain\": \"autodesk-construction-photo\",\n                 \"type\": \"photo\",\n                 \"id\": \"{{one_photo_id}}\" \n               }\n             ]\n           }\n         ]"
+								},
+								"url": {
+									"raw": "{{base_domain}}/bim360/relationship/v2/containers/:containerId/relationships",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"bim360",
+										"relationship",
+										"v2",
+										"containers",
+										":containerId",
+										"relationships"
+									],
+									"variable": [
+										{
+											"key": "containerId",
+											"value": "{{project_id_without_b}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "03-Search Relationship of Issues and Photos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Search Relationship with Domain and Type - Asset, Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"relationships is not null\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.relationships;",
+											"",
+											"    pm.expect(find).not.eq(undefined); ",
+											"     ",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/bim360/relationship/v2/containers/:projectId/relationships:search?domain=autodesk-bim360-issue&type=issue&id={{one_issue_id}}&withDomain=autodesk-construction-photo&withType=photo",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"bim360",
+										"relationship",
+										"v2",
+										"containers",
+										":projectId",
+										"relationships:search"
+									],
+									"query": [
+										{
+											"key": "domain",
+											"value": "autodesk-bim360-issue"
+										},
+										{
+											"key": "type",
+											"value": "issue"
+										},
+										{
+											"key": "id",
+											"value": "{{one_issue_id}}"
+										},
+										{
+											"key": "withDomain",
+											"value": "autodesk-construction-photo"
+										},
+										{
+											"key": "withType",
+											"value": "photo"
+										}
+									],
+									"variable": [
+										{
+											"key": "projectId",
+											"value": "{{project_id_without_b}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "04-Supported Relationships to Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/bim360/relationship/v2/utility/relationships:writable",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"bim360",
+										"relationship",
+										"v2",
+										"utility",
+										"relationships:writable"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Step 4: watch your callback",
-					"event": [
+					"name": "Webhook",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Get User@Me, Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"}); ",
-									"",
-									"pm.test(\"get user id \", function () {",
-									"    var body = JSON.parse(responseBody);  ",
-									"    pm.expect(body).not.eq(undefined); ",
-									"    pm.environment.set(\"creator_id\", body.id); ",
-									"    ",
-									"});  "
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "VIEW",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "userId",
-								"value": "200902260532621",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "watch your callback. When the event is triggered, get the information you want to check. See blog for more details: https://aps.autodesk.com/blog/webhook-api-acc-issue-released",
-							"protocol": "watch your callback. When the event is triggered, get the information you want to check. See blog for more details: https",
-							"host": [
-								"aps",
-								"autodesk",
-								"com"
-							],
-							"path": [
-								"blog",
-								"webhook-api-acc-issue-released"
-							],
-							"query": [
+							"name": "Step 1 : Find the Scope ID for Events",
+							"event": [
 								{
-									"key": "page[limit]",
-									"value": "200",
-									"disabled": true
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get User@Me, Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"}); ",
+											"",
+											"pm.test(\"get user id \", function () {",
+											"    var body = JSON.parse(responseBody);  ",
+											"    pm.expect(body).not.eq(undefined); ",
+											"    pm.environment.set(\"creator_id\", body.id); ",
+											"    ",
+											"});  "
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
 								}
-							]
+							],
+							"request": {
+								"method": "VIEW",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "userId",
+										"value": "200902260532621",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "In the scripts of Run First,   Prepare valid ProjectId. Ensure logged user is project admin",
+									"host": [
+										"In the scripts of Run First,   Prepare valid ProjectId",
+										" Ensure logged user is project admin"
+									],
+									"query": [
+										{
+											"key": "page[limit]",
+											"value": "200",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Step 2 : Prepare to Manage Callbacks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get User@Me, Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"}); ",
+											"",
+											"pm.test(\"get user id \", function () {",
+											"    var body = JSON.parse(responseBody);  ",
+											"    pm.expect(body).not.eq(undefined); ",
+											"    pm.environment.set(\"creator_id\", body.id); ",
+											"    ",
+											"});  "
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "VIEW",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "userId",
+										"value": "200902260532621",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "Create your own callback, or webhook hubs such as RequestBin. Get the callback url.",
+									"host": [
+										"Create your own callback, or webhook hubs such as RequestBin",
+										" Get the callback url",
+										""
+									],
+									"query": [
+										{
+											"key": "page[limit]",
+											"value": "200",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Step 3 : Create a Webhook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get User@Me, Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"}); ",
+											"",
+											"pm.test(\"get user id \", function () {",
+											"    var body = JSON.parse(responseBody);  ",
+											"    pm.expect(body).not.eq(undefined); ",
+											"    pm.environment.set(\"creator_id\", body.id); ",
+											"    ",
+											"});  "
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n           \"callbackUrl\": \"http://bf067e05.ngrok.io/callback\",\n           \"scope\": {\n             \"project\": \"{{project_id}}\"\n           },\n           \"hookAttribute\": {\n             \"MyTestData\": {\"test1\":123}\n           }\n         } ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://developer.api.autodesk.com/webhooks/v1/systems/autodesk.construction.issues/events/issue.created-1.0/hooks",
+									"protocol": "https",
+									"host": [
+										"developer",
+										"api",
+										"autodesk",
+										"com"
+									],
+									"path": [
+										"webhooks",
+										"v1",
+										"systems",
+										"autodesk.construction.issues",
+										"events",
+										"issue.created-1.0",
+										"hooks"
+									],
+									"query": [
+										{
+											"key": "page[limit]",
+											"value": "200",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Step 4: watch your callback",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get User@Me, Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"}); ",
+											"",
+											"pm.test(\"get user id \", function () {",
+											"    var body = JSON.parse(responseBody);  ",
+											"    pm.expect(body).not.eq(undefined); ",
+											"    pm.environment.set(\"creator_id\", body.id); ",
+											"    ",
+											"});  "
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "VIEW",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "userId",
+										"value": "200902260532621",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "watch your callback. When the event is triggered, get the information you want to check. See blog for more details: https://aps.autodesk.com/blog/webhook-api-acc-issue-released",
+									"protocol": "watch your callback. When the event is triggered, get the information you want to check. See blog for more details: https",
+									"host": [
+										"aps",
+										"autodesk",
+										"com"
+									],
+									"path": [
+										"blog",
+										"webhook-api-acc-issue-released"
+									],
+									"query": [
+										{
+											"key": "page[limit]",
+											"value": "200",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Download Attachment",
+					"item": [
+						{
+							"name": "01-get attachment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"get one issue attachments collection. Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"get one attachment data: \", function () {",
+											"    var resonse = JSON.parse(pm.response.text());",
+											"    if(resonse.attachments && resonse.attachments.length>0){",
+											"        pm.environment.set(\"one_attachment_id\", resonse.attachments[0].attachmentId);  ",
+											"        const newStorageId = resonse.attachments[0].storageUrn;",
+											"        const parsedData = newStorageId.match('^urn:adsk\\.objects:os\\.object:([-_.a-z0-9]{3,128})\\/(.+)$');",
+											"        const bucketKey = parsedData[1];",
+											"        const objectKey = parsedData[2];",
+											"        pm.environment.set(\"newStorageId\",newStorageId); ",
+											"        pm.environment.set(\"bucketKey\",bucketKey);",
+											"        pm.environment.set(\"objectKey\",objectKey);  ",
+											"    } ",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/construction/issues/v1/projects/:projectId/attachments/:issueId/items",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"construction",
+										"issues",
+										"v1",
+										"projects",
+										":projectId",
+										"attachments",
+										":issueId",
+										"items"
+									],
+									"variable": [
+										{
+											"key": "projectId",
+											"value": "{{project_id_without_b}}"
+										},
+										{
+											"key": "issueId",
+											"value": "{{one_issue_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "02-download signed url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var res = JSON.parse(pm.response.text());",
+											"",
+											"pm.test(\"Status\", function(){",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/oss/v2/buckets/:bucketKey/objects/:objectKey/signeds3download",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"oss",
+										"v2",
+										"buckets",
+										":bucketKey",
+										"objects",
+										":objectKey",
+										"signeds3download"
+									],
+									"variable": [
+										{
+											"key": "bucketKey",
+											"value": "{{bucketKey}}"
+										},
+										{
+											"key": "objectKey",
+											"value": "{{objectKey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add Attachment",
+					"item": [
+						{
+							"name": "00-get parent folder of Project Files",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"get top folders. Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											" ",
+											"",
+											"pm.test(\"get parent folder urn : \", function () {",
+											"    var resonse = JSON.parse(pm.response.text());",
+											"    if(resonse.data){",
+											"        const projectFilesFolderData = resonse.data.find(i=>i.attributes.name == 'Project Files'); ",
+											"        const rootFolderUrn = projectFilesFolderData.relationships.parent.data.id",
+											"         pm.environment.set(\"rootFolderUrn\",rootFolderUrn);  ",
+											"    } ",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/project/v1/hubs/:hubId/projects/:projectId/topFolders",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"project",
+										"v1",
+										"hubs",
+										":hubId",
+										"projects",
+										":projectId",
+										"topFolders"
+									],
+									"variable": [
+										{
+											"key": "hubId",
+											"value": "{{account_id}}"
+										},
+										{
+											"key": "projectId",
+											"value": "{{project_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "01-create storage",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"create storage for attachment. Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											"",
+											"",
+											"pm.test(\"get storage data: \", function () {",
+											"    var resonse = JSON.parse(pm.response.text());",
+											"    if(resonse.data){",
+											"        const newStorageId = resonse.data.id;",
+											"        const parsedData = newStorageId.match('^urn:adsk\\.objects:os\\.object:([-_.a-z0-9]{3,128})\\/(.+)$');",
+											"        const bucketKey = parsedData[1];",
+											"        const objectKey = parsedData[2];",
+											"        pm.environment.set(\"newStorageId\",newStorageId); ",
+											"        pm.environment.set(\"bucketKey\",bucketKey);",
+											"        pm.environment.set(\"objectKey\",objectKey);  ",
+											"         pm.environment.set(\"one_attachment_id\",objectKey.split(\".\")[0]);  ",
+											"    } ",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"",
+											"const timestamp = Date.now(); ",
+											"const randomPart = Math.random().toString(36).substring(2, 10); ",
+											"const randomFileName = `${randomPart}-${timestamp}.png`; ",
+											"pm.environment.set(\"randomFileName\", randomFileName);",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"jsonapi\": {\n          \"version\": \"1.0\"\n        },\n        \"data\": {\n          \"type\": \"objects\",\n          \"attributes\": {\n            \"name\": \"{{randomFileName}}\"\n          },\n          \"relationships\": {\n            \"target\": {\n              \"data\": {\n                \"type\": \"folders\",\n                \"id\": \"{{rootFolderUrn}}\"\n              }\n            }\n          }\n        }\n      }"
+								},
+								"url": {
+									"raw": "{{base_domain}}/data/v1/projects/:project_id/storage",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data",
+										"v1",
+										"projects",
+										":project_id",
+										"storage"
+									],
+									"variable": [
+										{
+											"key": "project_id",
+											"value": "{{project_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "02-get upload signed url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var resonse = JSON.parse(pm.response.text());",
+											" pm.environment.set(\"uploadKey\",resonse.uploadKey);",
+											" pm.environment.set(\"uploadUrl\",resonse.urls[0]);",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/oss/v2/buckets/:bucketKey/objects/:objectKey/signeds3upload",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"oss",
+										"v2",
+										"buckets",
+										":bucketKey",
+										"objects",
+										":objectKey",
+										"signeds3upload"
+									],
+									"variable": [
+										{
+											"key": "bucketKey",
+											"value": "{{bucketKey}}"
+										},
+										{
+											"key": "objectKey",
+											"value": "{{objectKey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "03-Upload File",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var res = JSON.parse(pm.response.text());",
+											"",
+											"pm.test(\"Status\", function(){",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "file",
+									"file": {
+										"src": "/Users/liangx/Desktop/Screenshot 2025-10-09 at 09.42.04.png"
+									}
+								},
+								"url": {
+									"raw": "{{uploadUrl}}",
+									"host": [
+										"{{uploadUrl}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "04-complete uploading",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"complete uploading. Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											" "
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const random_guid = crypto.randomUUID(); ",
+											"pm.environment.set(\"random_guid\", random_guid);",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"uploadKey\": \"{{uploadKey}}\"\n  }"
+								},
+								"url": {
+									"raw": "{{base_domain}}/oss/v2/buckets/:bucketKey/objects/:objectKey/signeds3upload",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"oss",
+										"v2",
+										"buckets",
+										":bucketKey",
+										"objects",
+										":objectKey",
+										"signeds3upload"
+									],
+									"variable": [
+										{
+											"key": "bucketKey",
+											"value": "{{bucketKey}}"
+										},
+										{
+											"key": "objectKey",
+											"value": "{{objectKey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "05-add attachments",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"create attachment for one issue. Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											" "
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const random_guid = crypto.randomUUID(); ",
+											"pm.environment.set(\"random_guid\", random_guid);",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \t\t\"domainEntityId\": \"{{one_issue_id}}\",\n    \t\t\"attachments\": [\n                {\n                    \"attachmentId\": \"{{one_attachment_id}}\",\n                    \"displayName\": \"{{randomFileName}}\",\n                    \"fileName\": \"{{objectKey}}\",\n                    \"attachmentType\": \"issue-attachment\",\n                    \"storageUrn\": \"{{newStorageId}}\"\n                }\n    \t\t]\n \t }"
+								},
+								"url": {
+									"raw": "{{base_domain}}/construction/issues/v1/projects/:projectId/attachments",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"construction",
+										"issues",
+										"v1",
+										"projects",
+										":projectId",
+										"attachments"
+									],
+									"variable": [
+										{
+											"key": "projectId",
+											"value": "{{project_id_without_b}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
