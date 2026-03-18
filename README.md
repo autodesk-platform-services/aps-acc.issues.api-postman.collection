@@ -53,13 +53,13 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
    <p align="center"><img src="./help/apiref-env.png" width="600" ></p>  
 
-9. Input the hub name in pre-scripts of **GET one Forma hub**, this will get the **id** of Forma hub.
+9. Input the hub name in pre-scripts of **GET one Account**, this will get the **id** of Forma hub.
 
  <div style="text-align: center;">
   <img src="help/account.png" alt="Postman Image" width="500" />
  </div>
 
-10. Input the project name in pre-scripts of **GET one Forma project**, this will get the project id of Forma hub from step #1. `project_id_with_b` will be used for working with RFI attachment uploading (Data Managament API). `project_id_without_b` will be used for all RFI APIs. 
+10. Input the project name in pre-scripts of **GET one Project**, this will get the project id of Forma hub from step #1. `project_id_with_b` will be used for working with RFI attachment uploading (Data Managament API). `project_id_without_b` will be used for all RFI APIs. 
 
 <div style="text-align: center;">
   <img src="help/project.png" alt="Postman Image" width="500" />
