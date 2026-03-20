@@ -30,7 +30,7 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
    <p align="center"><img src="./help/api-type.png" width="400" ></p>   
 
-2. **AutodeskForma Hub and project**: must be Hub Admin to add the app integration. [Learn about provisioning](https://aps.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). Make a note with the __hub name__
+2. **Autodesk Forma Hub and project**: must be Hub Admin to add the app integration. [Learn about provisioning](https://aps.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). Make a note with the __hub name__
 
 3. Follow the [product help document](https://construction.autodesk.com/tools/issues-software/) of Autodesk Forma to create some issues.
 
