@@ -30,9 +30,9 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
    <p align="center"><img src="./help/api-type.png" width="400" ></p>   
 
-2. **Forma Hub and project**: must be Hub Admin to add the app integration. [Learn about provisioning](https://aps.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). Make a note with the __hub name__
+2. **AutodeskForma Hub and project**: must be Hub Admin to add the app integration. [Learn about provisioning](https://aps.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). Make a note with the __hub name__
 
-3. Follow the [product help document](https://construction.autodesk.com/tools/issues-software/) of Forma for Construction to create some issues.
+3. Follow the [product help document](https://construction.autodesk.com/tools/issues-software/) of Autodesk Forma to create some issues.
 
 4. Create some custom attributes definitions with all types: text, dropdown, numeric and paragraph. This is to test creating/patching issue with custom attributes.
 
