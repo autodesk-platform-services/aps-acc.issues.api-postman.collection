@@ -1,15 +1,15 @@
-# Postman Collection for ACC Issues API 
+# Postman Collection for Forma Issues API 
 
 [![Postman](https://img.shields.io/badge/Postman-v8.11-orange.svg)](https://www.getpostman.com/)
 
-[![Issue API of Autodesk Construction Cloud](https://img.shields.io/badge/acc%20issue%20api-v1-yellowgreen)](https://aps.autodesk.com/en/docs/acc/v1/overview/field-guide/issues/)
+[![Forma Issue API](https://img.shields.io/badge/forma%20issue%20api-v1-yellowgreen)](https://aps.autodesk.com/en/docs/acc/v1/overview/field-guide/issues/)
 
 ![Beginner](https://img.shields.io/badge/Level-Beginner-green.svg)
 [![License](https://img.shields.io/:license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 ## Description
 
-This repository provides a postman collection that demonstrates the usage of [Issues API for Autodesk Construction Cloud](https://aps.autodesk.com/en/docs/acc/v1/overview/field-guide/issues/) .  
+This repository provides a postman collection that demonstrates the usage of [Forma Issues API](https://aps.autodesk.com/en/docs/acc/v1/overview/field-guide/issues/) .  
 
 The API supports **3 legged token** only.
 
@@ -30,9 +30,9 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
    <p align="center"><img src="./help/api-type.png" width="400" ></p>   
 
-2. **ACC Account and project**: must be Account Admin to add the app integration. [Learn about provisioning](https://aps.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). Make a note with the __account name__
+2. **Autodesk Forma Hub and project**: must be Hub Admin to add the app integration. [Learn about provisioning](https://aps.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). Make a note with the __hub name__
 
-3. Follow the [product help document](https://construction.autodesk.com/tools/issues-software/) of ACC to create some issues.
+3. Follow the [product help document](https://construction.autodesk.com/tools/issues-software/) of Autodesk Forma to create some issues.
 
 4. Create some custom attributes definitions with all types: text, dropdown, numeric and paragraph. This is to test creating/patching issue with custom attributes.
 
@@ -53,13 +53,13 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
    <p align="center"><img src="./help/apiref-env.png" width="600" ></p>  
 
-9. Input the account(hub) name in pre-scripts of **GET one ACC account**, this will get the account(hub) id of ACC account.
+9. Input the hub name in pre-scripts of **GET one Account**, this will get the **id** of Forma hub.
 
  <div style="text-align: center;">
   <img src="help/account.png" alt="Postman Image" width="500" />
  </div>
 
-10. Input the project name in pre-scripts of **GET one ACC project**, this will get the project id of ACC account from step #1. `project_id_with_b` will be used for working with RFI attachment uploading (Data Managament API). `project_id_without_b` will be used for all RFI APIs. 
+10. Input the project name in pre-scripts of **GET one Project**, this will get the project id of Forma hub from step #1. `project_id_with_b` will be used for working with RFI attachment uploading (Data Managament API). `project_id_without_b` will be used for all RFI APIs. 
 
 <div style="text-align: center;">
   <img src="help/project.png" alt="Postman Image" width="500" />
@@ -87,7 +87,7 @@ Issue API requires to work with 3-legged token. This collection takes **[Inherit
 
 1. Assume the steps of **Setup** have been performed and the access token is ready.
 
-2. Run the scripts in **Run First**. It will get account(hub) id, project id and one user id (for assignee when creating a new issue). Because the API to get project users of ACC has not been exposed, we workaround by calling [GET:Account Users](https://aps.autodesk.com/en/docs/acc/v1/reference/http/users-GET/). This endpoint requires 2-legged token, so run _03-[backup]Authentication 2-legged token_ before running _03-[Workaround-2LO] Get One Account User Id_. 
+2. Run the scripts in **Run First**. It will get hub id, project id and one user id (for assignee when creating a new issue). Because the API to get Forma project users has not been exposed, we workaround by calling [GET:Account Users](https://aps.autodesk.com/en/docs/acc/v1/reference/http/users-GET/). This endpoint requires 2-legged token, so run _03-[backup]Authentication 2-legged token_ before running _03-[Workaround-2LO] Get One Account User Id_. 
 
    Next call _04-GET One Location_ to get one location id (for testing issue creation)
 
@@ -96,7 +96,7 @@ Issue API requires to work with 3-legged token. This collection takes **[Inherit
     
     <p align="center"><img src="./help/collection.png" width="400" ></p>   
 
-4. (Optional) In ACC, a reference is defined by Relationships API, which is a common across different modules. To work with **Issue>>References**, you can use [Relationship API](https://aps.autodesk.com/en/docs/acc/v1/reference/http/relationship-service-v2-search-relationships-GET/). This sample Postman collection includes a few sample usages. For more detail about Relationships API, please take a look [at this blog](https://forge.autodesk.com/blog/bim-360acc-relationships-api). 
+4. (Optional) In Forma for Construction, a reference is defined by Relationships API, which is a common across different modules. To work with **Issue>>References**, you can use [Relationship API](https://aps.autodesk.com/en/docs/acc/v1/reference/http/relationship-service-v2-search-relationships-GET/). This sample Postman collection includes a few sample usages. For more detail about Relationships API, please take a look [at this blog](https://forge.autodesk.com/blog/bim-360acc-relationships-api). 
 
     *  01-Get id of one photo: call [Photo API](https://aps.autodesk.com/en/docs/acc/v1/reference/http/photos-getfilteredphotos-POST/) to get one photo id
     * 02-Add Reference of Issue with Photo: add reference between one issue (from previous test scripts in #3) and one photo
